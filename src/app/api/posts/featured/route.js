@@ -4,7 +4,9 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     const response = await getFeaturedPosts();
-    return response;
+    return NextResponse.json({
+      response,
+    });
   } catch (error) {
     return NextResponse.json({
       status: 500,

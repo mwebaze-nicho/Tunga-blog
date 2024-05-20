@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 function BlogPosts() {
   const { data, error, isLoading } = usePosts();
-  isLoading && <p>Loading...</p>;
-  error && console.log("Loading");
 
   return (
     <>
