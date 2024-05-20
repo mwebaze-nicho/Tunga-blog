@@ -1,9 +1,6 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { AuthProvider, Providers } from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
+import { AuthProvider, ChackraProviders, SwrProviders } from "./providers";
 
 export const metadata = {
   title: "Tech 🧑🏽‍💻 Blog",
@@ -14,12 +11,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <AuthProvider>
-          <Providers>
-            <Navbar />
-            {children}
-          </Providers>
+          <ChackraProviders>
+            <SwrProviders>
+              <Navbar />
+              {children}
+            </SwrProviders>
+          </ChackraProviders>
         </AuthProvider>
       </body>
     </html>

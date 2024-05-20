@@ -7,7 +7,7 @@ function Comments({ comments }) {
       <span className="title">Comments</span>
       <div className="comments">
         <div className="comment-container">
-          {comments.length > 0 ? (
+          {comments && comments.length > 0 ? (
             comments.map((comment, index) => (
               <span key={index} className="mb-3 md:mb-6">
                 <div className="user">
