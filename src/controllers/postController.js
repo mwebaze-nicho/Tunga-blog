@@ -220,7 +220,11 @@ export const getFeaturedPosts = async () => {
       }
     }
 
-    if (postsList.length === 0) return null;
+    if (postsList.length === 0)
+      return NextResponse.json({
+        status: 404,
+        message: "No posts found",
+      });
 
     return NextResponse.json({
       data: postsList,

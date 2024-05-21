@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 function FeaturedPosts() {
   const { data, error, isLoading } = useFeaturedPosts();
-
-  data && console.log(data.data);
   return (
     <>
       {isLoading ? (
