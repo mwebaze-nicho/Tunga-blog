@@ -1,56 +1,33 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import jwt from "jsonwebtoken";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { api } from "@/config/axiosConfig";
 
-function PasswordReset() {
-  const [password, setPassword] = useState("");
+function ForgotPassword() {
+  const [userName, setUserName] = useState("");
   const [error, seterror] = useState("");
 
   const router = useRouter();
-
-  //get token from the query
-  const searchparams = useSearchParams();
-  const token = searchparams.get("token");
-
-  if (!token) {
-    alert("Request token to use this page");
-    router.push("/users/forgotpassword");
-    return;
-  }
-
-  //get user details from the token
-  const { user } = jwt.decode(token);
-
-  if (!user) {
-    seterror("No user specified");
-    router.push("/");
-    return;
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await api.patch(
-        "/api/users/reset",
-        {
-          newPassword: password,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const confirmed = confirm(
+        "Are you sure you want to reset your password?"
       );
-      if (res.error) {
-        seterror("Failed to update password");
-        return null;
+
+      if (confirmed) {
+        const res = await api.post("/api/users/reset", {userName});
+
+        if (res.error) {
+          seterror("Password change request failed");
+          return null;
+        }
+        alert("Check your email and reset password.");
+        router.push("/");
       }
-      alert(res.data.message);
-      router.push("/users/login");
     } catch (error) {
       console.log("An error occured registering user");
     }
@@ -68,33 +45,26 @@ function PasswordReset() {
             id="form-title"
             className="text-center text-3xl font-bold mb-10 text-gray-800"
           >
-            New Password
+            Submit Request
           </h2>
           <form className="space-y-5" onSubmit={handleSubmit}>
             <input
               className="w-full h-12 border border-gray-800 px-3 rounded-lg"
-              placeholder="User name"
+              placeholder="Registered username"
               name="userName"
               type="text"
-              value={user && user.userName.toUpperCase()}
-              disabled
-            />
-            <input
-              className="w-full h-12 border border-gray-800 px-3 rounded-lg"
-              placeholder="New password"
-              name="updatedPassword"
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
+              required
+              minLength={6}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
             />
             {error && <p className="text-red-500 text-left">{error}</p>}
             <button
               type="submit"
               className="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Update Password
+              Forgot Password
             </button>
-
-            {/* Create account if not yet registered */}
             <div>
               <p>
                 No account:{" "}
@@ -112,4 +82,4 @@ function PasswordReset() {
     </div>
   );
 }
-export default PasswordReset;
+export default ForgotPassword;

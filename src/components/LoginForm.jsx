@@ -47,7 +47,7 @@ function LoginForm() {
         console.log(res);
         return null;
       }
-      
+
       router.refresh();
     } catch (error) {
       console.log("An error occured registering user");
@@ -92,7 +92,7 @@ function LoginForm() {
             </button>
             <Link
               className="text-blue-500 hover:text-blue-800 text-sm"
-              href="#"
+              href={"/users/forgotpassword"}
             >
               Forgot Password?
             </Link>
