@@ -15,7 +15,7 @@ function BlogPosts() {
             ) : error ? (
               <p>Error fetching blogs</p>
             ) : (
-              data &&
+              data && Array.isArray(data.data) &&
               data.data.map((post, index) => {
                 const localDate = new Date(post.date).toLocaleString();
                 const postDescription = post.description.slice(0, 150);

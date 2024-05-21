@@ -5,6 +5,7 @@ import Image from "next/image";
 function FeaturedPosts() {
   const { data, error, isLoading } = useFeaturedPosts();
 
+  data && console.log(data.data);
   return (
     <>
       {isLoading ? (
@@ -12,7 +13,8 @@ function FeaturedPosts() {
       ) : error ? (
         <p>Error</p>
       ) : (
-        data && (
+        data &&
+        Array.isArray(data.data) && (
           <div className="bg-white py-4">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-2 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3">

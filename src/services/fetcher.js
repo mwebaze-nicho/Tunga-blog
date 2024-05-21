@@ -10,7 +10,9 @@ const fetcher = async (url) => {
     const res = await axiosInstance.get(url);
 
     return res.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export default fetcher;
