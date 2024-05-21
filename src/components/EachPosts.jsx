@@ -3,7 +3,6 @@
 import Comments from "./Comments";
 import Image from "next/image";
 import CreateComment from "./CreateComment";
-import Link from "next/link";
 import FeatureButton from "./buttons/FeatureButton";
 import EditButton from "./buttons/EditButton";
 import { useOnePost } from "@/services/queries";

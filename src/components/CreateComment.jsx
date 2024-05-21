@@ -31,7 +31,7 @@ function CreateComment(props) {
 
     try {
       const newComment = { comment: comment };
-      const comm = await api.post(`/posts/${props.postId}/comment`, newComment, {
+      const comm = await api.post(`/api/posts/${props.postId}/comment`, newComment, {
         headers: {
           Authorization: `Bearer ${session.user.accessToken}`,
         },

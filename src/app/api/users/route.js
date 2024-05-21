@@ -4,10 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const response = await registerUser(req);
-    return NextResponse.json({
-      status: 201,
-      message: response,
-    });
+    return response;
   } catch (error) {
     return NextResponse.json({
       status: 500,

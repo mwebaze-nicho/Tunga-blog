@@ -1,7 +1,10 @@
 import PasswordReset from "@/components/PasswordResetForm";
-
+import { Suspense } from "react";
 function ResetPassword() {
-  
-  return <PasswordReset />;
+  return (
+    <Suspense>
+      <PasswordReset />
+    </Suspense>
+  );
 }
 export default ResetPassword;

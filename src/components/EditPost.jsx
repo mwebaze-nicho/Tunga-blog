@@ -7,9 +7,11 @@ import { useSession } from "next-auth/react";
 import LoginForm from "./LoginForm";
 
 function EditPost({ id, title, category, description }) {
-  const [newTitle, setNewTitle] = useState(title);
-  const [newCategory, setNewCategory] = useState(category);
-  const [newDescription, setNewDescription] = useState(description);
+  const [newTitle, setNewTitle] = useState(title && title);
+  const [newCategory, setNewCategory] = useState(category && category);
+  const [newDescription, setNewDescription] = useState(
+    description && description
+  );
 
   const { data: session, status } = useSession();
 
@@ -26,7 +28,7 @@ function EditPost({ id, title, category, description }) {
     };
 
     try {
-      await api.patch(`/posts/${id}`, updatedPost);
+      await api.patch(`/api/posts/${id}`, updatedPost);
 
       router.push("/");
 

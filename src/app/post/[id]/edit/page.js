@@ -1,26 +1,25 @@
+"use client";
 import EditPost from "@/components/EditPost";
-import { fetcher } from "@/controllers/fetchers/postsFetcher";
+import { useOnePost } from "@/services/queries";
 
-async function PostUpdate({ params }) {
+function PostUpdate({ params }) {
   const { id } = params;
 
   //get post information to be updated
-  const res = await fetcher(`/posts/${id}`);
-  if (!res) {
-    return null;
-  }
-  const post = await res.data;
-
-  const { _id, postName, category, description } = post;
+  const { data, error, isLoading } = useOnePost(id);
+  isLoading && <p>Loading...</p>;
+  error && <p>An error occured in fetching the post.</p>;
 
   return (
     <div>
-      <EditPost
-        title={postName}
-        category={category}
-        id={_id}
-        description={description}
-      />
+      {data && (
+        <EditPost
+          title={data.data.postName}
+          category={data.data.category}
+          id={data.data._id}
+          description={data.data.description}
+        />
+      )}
     </div>
   );
 }

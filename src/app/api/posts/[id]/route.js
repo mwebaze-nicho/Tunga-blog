@@ -6,7 +6,6 @@ export async function GET(req, { params }) {
   const { id } = params;
   try {
     const response = await getPost(id);
-
     return response;
   } catch (error) {
     return NextResponse.json({

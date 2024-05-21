@@ -36,7 +36,7 @@ function CreatePost() {
     const newPost = { postName: title, category, description };
 
     try {
-      await api.post("/posts", newPost, {
+      await api.post("/api/posts", newPost, {
         headers: {
           Authorization: `Bearer ${session.user.accessToken}`,
         },

@@ -44,7 +44,7 @@ function RegisterForm() {
         password: userPassword,
       };
 
-      await api.post("/users", userData);
+      await api.post("/api/users", userData);
 
       //push to user login
       router.push("/users/login");

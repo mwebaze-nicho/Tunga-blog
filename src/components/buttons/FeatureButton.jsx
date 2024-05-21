@@ -2,7 +2,6 @@
 
 import { api } from "@/config/axiosConfig";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -18,7 +17,7 @@ function FeatureButton({ postId, feature, owner }) {
     setError(null);
     try {
       setNewFeature((prevFeature) => !prevFeature);
-      await api.patch(`/posts/${postId}/featured?feature=${!newFeature}`);
+      await api.patch(`/api/posts/${postId}/featured?feature=${!newFeature}`);
       router.refresh();
     } catch (error) {
       setError("Failed to update feature status");
