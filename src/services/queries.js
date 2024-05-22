@@ -5,6 +5,7 @@ export function usePosts() {
   return useSWR("/api/posts");
 }
 
+
 export function useFeaturedPosts() {
   return useSWR("/api/posts/featured");
 }

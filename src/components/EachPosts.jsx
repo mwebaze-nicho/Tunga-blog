@@ -6,13 +6,12 @@ import CreateComment from "./CreateComment";
 import FeatureButton from "./buttons/FeatureButton";
 import EditButton from "./buttons/EditButton";
 import { useOnePost } from "@/services/queries";
+import DeleteButton from "./buttons/DeleteButton";
 
 function EachPost(props) {
   // const res = await fetcher(`/posts/${props.id}`);
   const { data, error, isLoading } = useOnePost(props.id);
   // const post = await res.data;
-
-  data && data.data.comments;
 
   return (
     <div className="bg-white py-4">
@@ -45,6 +44,10 @@ function EachPost(props) {
                   <FeatureButton
                     owner={data.data.postCreator}
                     feature={data.data.featured}
+                    postId={props.id}
+                  />
+                  <DeleteButton
+                    owner={data.data.postCreator}
                     postId={props.id}
                   />
                 </div>

@@ -30,102 +30,106 @@ function Navbar() {
       justify="end"
       wrap="wrap"
       padding="1rem"
-      bg="teal.500"
-      //   color="white"
+      className=" text-gray-800"
+      // bg="teal.500"
+        
     >
-      <span className="hidden md:flex gap-8 items-center">
-        <Link as={NextLink} href="/" _hover={{ textDecoration: "none" }}>
-          Home
-        </Link>
-        <Link as={NextLink} href="/about" _hover={{ textDecoration: "none" }}>
-          About
-        </Link>
-        <Link as={NextLink} href="#" _hover={{ textDecoration: "none" }}>
-          My Posts
-        </Link>
-        <Link
-          as={NextLink}
-          href="/post/create"
-          _hover={{ textDecoration: "none" }}
-        >
-          Create Post
-        </Link>
-        {!session ? (
+      <span className="flex justify-between w-full">
+        <h1 className="text-xl">TECH 🧑🏽‍💻 BLOG</h1>
+        <span className="hidden md:flex gap-8 items-center">
+          <Link as={NextLink} href="/" _hover={{ textDecoration: "none" }}>
+            Home
+          </Link>
+          {/* <Link as={NextLink} href="/about" _hover={{ textDecoration: "none" }}>
+            About
+          </Link>
+          <Link as={NextLink} href="#" _hover={{ textDecoration: "none" }}>
+            My Posts
+          </Link> */}
           <Link
             as={NextLink}
-            href="/users/login"
+            href="/post/create"
             _hover={{ textDecoration: "none" }}
           >
-            Login
+            Create Post
           </Link>
-        ) : (
-          <Link
-            as={NextLink}
-            href="/"
-            _hover={{ textDecoration: "none" }}
-            onClick={() => signOut()}
-          >
-            Logout
-          </Link>
-        )}
-      </span>
-
-      {/* for small screens */}
-      <span className="md:hidden">
-        <Menu isOpen={isOpen}>
-          <MenuButton
-            as={IconButton}
-            aria-label="Options"
-            icon={
-              isOpen ? (
-                <CloseIcon name="menu" size="24px" />
-              ) : (
-                <HamburgerIcon name="menu" size="24px" />
-              )
-            }
-            variant="outline"
-            onClick={onToggle}
-          />
-          <MenuList>
-            <MenuItem as={NextLink} href="/" onClick={handleMenuItemClick}>
-              Home
-            </MenuItem>
-            <MenuItem as={NextLink} href="/about" onClick={handleMenuItemClick}>
-              About
-            </MenuItem>
-            <MenuItem as={NextLink} href="#" onClick={handleMenuItemClick}>
-              My Posts
-            </MenuItem>
-            <MenuItem
+          {!session ? (
+            <Link
               as={NextLink}
-              href="/post/create"
-              onClick={handleMenuItemClick}
+              href="/users/login"
+              _hover={{ textDecoration: "none" }}
             >
-              Create Post
-            </MenuItem>
-            {!session ? (
+              Login
+            </Link>
+          ) : (
+            <Link
+              as={NextLink}
+              href="/"
+              _hover={{ textDecoration: "none" }}
+              onClick={() => signOut()}
+            >
+              Logout
+            </Link>
+          )}
+        </span>
+  
+        {/* for small screens */}
+        <span className="md:hidden">
+          <Menu isOpen={isOpen}>
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={
+                isOpen ? (
+                  <CloseIcon name="menu" size="24px" />
+                ) : (
+                  <HamburgerIcon name="menu" size="24px" />
+                )
+              }
+              variant="outline"
+              onClick={onToggle}
+            />
+            <MenuList>
+              <MenuItem as={NextLink} href="/" onClick={handleMenuItemClick}>
+                Home
+              </MenuItem>
+              {/* <MenuItem as={NextLink} href="/about" onClick={handleMenuItemClick}>
+                About
+              </MenuItem>
+              <MenuItem as={NextLink} href="#" onClick={handleMenuItemClick}>
+                My Posts
+              </MenuItem> */}
               <MenuItem
                 as={NextLink}
-                href="/users/login"
-                _hover={{ textDecoration: "none" }}
+                href="/post/create"
                 onClick={handleMenuItemClick}
               >
-                Login
+                Create Post
               </MenuItem>
-            ) : (
-              <MenuItem
-                as={NextLink}
-                href="/"
-                onClick={() => {
-                  handleMenuItemClick();
-                  signOut();
-                }}
-              >
-                Logout
-              </MenuItem>
-            )}
-          </MenuList>
-        </Menu>
+              {!session ? (
+                <MenuItem
+                  as={NextLink}
+                  href="/users/login"
+                  _hover={{ textDecoration: "none" }}
+                  onClick={handleMenuItemClick}
+                >
+                  Login
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  as={NextLink}
+                  href="/"
+                  onClick={() => {
+                    handleMenuItemClick();
+                    signOut();
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              )}
+            </MenuList>
+          </Menu>
+        </span>
       </span>
     </Flex>
   );

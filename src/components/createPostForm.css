@@ -1,20 +1,4 @@
-/* .button {
-    appearance: none;
-    font: inherit;
-    border: none;
-    background: none;
-    cursor: pointer;
-  } */
 
-.container {
-  position: absolute;
-  margin-top: 4rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-}
 
 .modal {
   display: flex;

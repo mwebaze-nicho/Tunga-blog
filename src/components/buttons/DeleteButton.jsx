@@ -5,9 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-function FeatureButton({ postId, feature, owner }) {
-  const [newFeature, setNewFeature] = useState(feature);
-  const [loading, setLoading] = useState(false);
+function DeleteButton({ postId, owner }) {
   const [error, setError] = useState(null);
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -16,20 +14,13 @@ function FeatureButton({ postId, feature, owner }) {
     setLoading(true);
     setError(null);
     try {
-      setNewFeature((prevFeature) => !prevFeature);
-      await api.patch(`/api/posts/${postId}/featured?feature=${!newFeature}`);
-      router.refresh();
+      await api.delete(`/api/posts/${postId}`);
+      router.push("/");
     } catch (error) {
-      setError("Failed to update feature status");
-      console.log("Failed to feature post", error);
-    } finally {
-      setLoading(false);
+      setError("Failed to delete the post");
+      console.log("Failed to delete the post", error);
     }
   };
-
-  if (status === "loading") {
-    return null;
-  }
 
   if (
     status === "unauthenticated" ||
@@ -46,11 +37,11 @@ function FeatureButton({ postId, feature, owner }) {
         className="relative z-10 rounded-full bg-blue-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-blue-100"
         disabled={loading}
       >
-        {newFeature ? "Unfeature Post" : "Feature Post"}
+        Delete
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 }
 
-export default FeatureButton;
+export default DeleteButton;

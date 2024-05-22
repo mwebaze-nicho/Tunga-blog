@@ -55,8 +55,8 @@ function CreatePost() {
   if (!session) return <LoginForm />;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="container">
+    <form className="flex min-h-full  w-full p-6 items-center justify-center" onSubmit={handleSubmit}>
+      <div className="w-full flex items-center justify-center">
         {!session && <LoginForm />}
         <div className="modal">
           <div className="modal__header">
