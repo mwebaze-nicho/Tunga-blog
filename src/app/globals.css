@@ -209,3 +209,7 @@ body {
     opacity: 0;
   }
 }
+
+.posts {
+  @apply flex items-center min-h-full min-w-full bg-white justify-center flex-col py-8
+}

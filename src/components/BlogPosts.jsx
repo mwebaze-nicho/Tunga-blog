@@ -1,29 +1,25 @@
 "use client";
-import { usePosts } from "@/services/queries";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect } from "react";
-function BlogPosts() {
-  const { data, error, isLoading, mutate } = usePosts();
-  useEffect(() => {
-    mutate();
-  }, [data]);
-
+function BlogPosts({ data, error, isLoading }) {
   return (
     <>
-      <div className="bg-white py-4 mt-4 md:mt-8" id="blogs">
+      <div
+        className="bg-white py-4 mt-4 min-w-full min-h-full md:mt-8"
+        id="blogs"
+      >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <hr />
           <p className="text-lg text-gray-900 font-bold">All Blog Posts</p>
-          <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-2 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-2 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3 items-center">
             {isLoading ? (
               <p>Loading...</p>
             ) : error ? (
               <p>Error fetching blogs</p>
             ) : (
               data &&
-              Array.isArray(data.data) &&
-              data.data.map((post, index) => {
+              Array.isArray(data) &&
+              data.map((post, index) => {
                 const localDate = new Date(post.date).toLocaleString();
                 const postDescription = post.description.slice(0, 150);
                 return (
@@ -44,14 +40,13 @@ function BlogPosts() {
                         </p>
                       </div>
                     </Link>
-                    <div className="flex items-center gap-x-4 text-xs">
+                    <div className="flex items-center gap-x-4 text-xs mt-4">
                       <time className="text-gray-500">{localDate}</time>
-                      <a
-                        href="#"
-                        className="relative z-10 rounded-full bg-blue-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-blue-50"
+                      <span
+                        className="relative z-10  rounded-full  px-3 py-1.5 font-medium text-gray-600 bg-blue-50/50"
                       >
                         {post.category}
-                      </a>
+                      </span>
                     </div>
                     <div className="relative mt-4 mb-6 flex items-center gap-x-4">
                       <Image

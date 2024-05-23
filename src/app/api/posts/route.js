@@ -22,9 +22,14 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
+  //paginating the results using limit and page number
+  const searchParams = req.nextUrl.searchParams;
+  const limit = searchParams.get("limit");
+  const page = searchParams.get("page");
+
   try {
-    const response = await getPosts();
+    const response = await getPosts(page, limit);
     return response;
   } catch (error) {
     return NextResponse.json({

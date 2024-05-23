@@ -4,11 +4,22 @@ import Post from "@/models/postModel";
 import User from "@/models/userModel";
 
 //Retrieving all saved blog posts
-export const getPosts = async () => {
+export const getPosts = async (page, limit) => {
+  const pageIndex = parseInt(page);
+  const limitIndex = parseInt(limit);
+  const skip = (pageIndex - 1) * limitIndex;
   try {
     await connectDB();
 
-    const posts = await Post.find().select("-comments");
+    const posts = await Post.find()
+      .select("-comments")
+      .sort({ date: -1 })
+      .skip(skip)
+      .limit(limitIndex)
+      .exec();
+
+    //total posts in the database
+    const totalPosts = await Post.countDocuments().exec();
 
     const postsList = [];
     for (const post of posts) {
@@ -32,6 +43,7 @@ export const getPosts = async () => {
     return NextResponse.json({
       status: 200,
       data: postsList,
+      totalPages: Math.ceil(totalPosts / limitIndex),
     });
   } catch (error) {
     return NextResponse.json({

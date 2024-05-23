@@ -1,6 +1,7 @@
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { AuthProvider, ChackraProviders, SwrProviders } from "./providers";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Tech 🧑🏽‍💻 Blog",
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
             <SwrProviders>
               <Navbar />
               {children}
+              <Footer />
             </SwrProviders>
           </ChackraProviders>
         </AuthProvider>

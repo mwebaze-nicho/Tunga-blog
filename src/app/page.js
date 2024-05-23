@@ -1,7 +1,6 @@
-import BlogPosts from "@/components/BlogPosts";
 import FeaturedPosts from "@/components/FeaturedPosts";
 import LandingPage from "@/components/LandingPage";
-// import SwrCompo from "@/components/BlogPosts";
+import PostWrapper from "@/components/PostWrapper";
 
 export default async function Home() {
   return (
@@ -9,7 +8,7 @@ export default async function Home() {
       <LandingPage />
       <span>
         <FeaturedPosts />
-        <BlogPosts />
+        <PostWrapper/>
       </span>
     </div>
   );
