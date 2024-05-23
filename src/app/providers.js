@@ -17,10 +17,8 @@ export function SwrProviders({ children }) {
     <SWRConfig
       value={{
         fetcher,
-        // refreshInterval: 3000,
-        // // revalidateOnFocus: true,
-        // revalidateIfStale: true
-        
+        refreshInterval: 3000,
+        revalidateIfStale: true,
       }}
     >
       {children}
