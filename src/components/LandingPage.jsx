@@ -36,7 +36,7 @@ function LandingPage() {
         <section className="mt-16 md:mt-24 lg:mt-32 px-4 sm:px-6 lg:px-8 w-full max-w-5xl">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">
-              What You'll Find Here
+              What You&apos;ll Find Here
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               Explore the latest trends, tips, and best practices in the world of technology.
