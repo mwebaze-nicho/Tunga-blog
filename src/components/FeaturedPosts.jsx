@@ -21,7 +21,7 @@ function FeaturedPosts() {
                 return (
                   <article
                     key={index}
-                    className="flex max-w-xl flex-col items-start justify-between"
+                    className="flex max-w-xl flex-col items-start justify-between shadow-lg p-4"
                   >
                     <Link href={`post/${post._id}`}>
                       <div className="group relative">

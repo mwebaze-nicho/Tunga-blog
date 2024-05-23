@@ -6,7 +6,7 @@ export function usePosts() {
 }
 
 export function usePosts1(pageIndex) {
-  return useSWR(`/api/posts?page=${pageIndex}&limit=3`);
+  return useSWR(`/api/posts?page=${pageIndex}&limit=6`);
 }
 
 export function useFeaturedPosts() {

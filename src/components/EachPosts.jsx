@@ -7,6 +7,7 @@ import FeatureButton from "./buttons/FeatureButton";
 import EditButton from "./buttons/EditButton";
 import { useOnePost } from "@/services/queries";
 import DeleteButton from "./buttons/DeleteButton";
+import LoadingFrame from "./Loading";
 
 function EachPost(props) {
   // const res = await fetcher(`/posts/${props.id}`);
@@ -18,7 +19,7 @@ function EachPost(props) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col md:flex-row md:gap-40 md:justify-center">
         <div className="mx-auto mt-2 max-w-2xl  gap-x-8 gap-y-2 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {isLoading ? (
-            <p>Loading...</p>
+            <LoadingFrame />
           ) : error ? (
             <p>Error occured</p>
           ) : (
@@ -35,7 +36,7 @@ function EachPost(props) {
                     {data.data.description}
                   </p>
                 </div>
-                <div className="flex items-center gap-x-4 text-xs">
+                <div className="flex items-center gap-4 text-xs mt-4">
                   <time className="text-gray-500">{data.data.date}</time>
                   <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
                     {data.data.category}

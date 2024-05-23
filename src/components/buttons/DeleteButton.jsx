@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function DeleteButton({ postId, owner }) {
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -19,6 +20,8 @@ function DeleteButton({ postId, owner }) {
     } catch (error) {
       setError("Failed to delete the post");
       console.log("Failed to delete the post", error);
+    } finally {
+      setLoading(false);
     }
   };
 

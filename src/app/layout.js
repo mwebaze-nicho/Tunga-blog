@@ -11,13 +11,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className=" bg-neutral-200">
+    <html lang="en" className="h-full">
+      <body className=" bg-neutral-200 flex flex-col min-h-full">
         <AuthProvider>
           <ChackraProviders>
             <SwrProviders>
               <Navbar />
-              {children}
+              <main className="flex-grow">{children}</main>
               <Footer />
             </SwrProviders>
           </ChackraProviders>
