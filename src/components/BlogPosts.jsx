@@ -1,26 +1,77 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LoadingFrame from "./Loading";
+
 function BlogPosts({ data, error, isLoading }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const filteredData = data?.filter((post) => {
+    const matchesSearch = post.postName
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory
+      ? post.category === selectedCategory
+      : true;
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <>
       <div
         className="bg-white py-4 mt-4 min-w-full min-h-full md:mt-8"
         id="blogs"
       >
+      
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <hr />
-          <p className="text-lg text-gray-900 font-bold">All Blog Posts</p>
+        <hr />
+          <div className="flex justify-between items-center flex-col md:flex-row my-4 gap-4 ">
+            <div className="w-full">
+              <p className="text-lg text-gray-900 font-bold ">All Blog Posts</p>
+            </div>
+            <div className="w-full">
+              <input
+                type="text"
+                placeholder="Search by title..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="border border-gray-300 p-2 rounded w-full focus:outline-none"
+              />
+            </div>
+            <div className="w-full">
+              <select
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="border border-gray-300 p-2 rounded w-full focus:outline-none"
+              >
+                <option value="">All Categories</option>
+                <option value="AI">AI</option>
+                <option value="Backend">Backend</option>
+                <option value="Frontend">Frontend</option>
+                <option value="FullStack">FullStack</option>
+              </select>
+            </div>
+          </div>
+
           <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-8 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3 items-center">
             {isLoading ? (
               <LoadingFrame />
             ) : error ? (
               <p>Error fetching blogs</p>
+            ) : filteredData.length === 0 ? (
+              <p className="text-gray-500">No matching blog posts found</p>
             ) : (
-              data &&
-              Array.isArray(data) &&
-              data.map((post, index) => {
+              filteredData.map((post, index) => {
                 const localDate = new Date(post.date).toLocaleString();
                 const postDescription = post.description.slice(0, 150);
                 return (
@@ -74,4 +125,5 @@ function BlogPosts({ data, error, isLoading }) {
     </>
   );
 }
+
 export default BlogPosts;

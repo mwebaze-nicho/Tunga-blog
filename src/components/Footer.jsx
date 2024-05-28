@@ -2,6 +2,7 @@ import Link from "next/link";
 
 function Footer() {
   const year = new Date().getFullYear();
+
   return (
     <footer className="bg-gradient-to-tr from-blue-400/90 via-blue-300 to-blue-800/85 w-full bottom-0 left-0 right-0">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
