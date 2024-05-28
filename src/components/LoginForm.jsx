@@ -10,6 +10,7 @@ function LoginForm() {
     userPassword: "",
   });
   const [error, seterror] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -27,6 +28,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     const { userName, userPassword } = userDetails;
 
     if (!userName || !userPassword) {
@@ -48,7 +50,9 @@ function LoginForm() {
         return null;
       }
 
-      router.refresh();
+      setTimeout(() => {
+        router.refresh();
+      }, 1000);
     } catch (error) {
       console.log("An error occured registering user");
     }
@@ -74,21 +78,25 @@ function LoginForm() {
               placeholder="User name"
               name="userName"
               type="text"
+              minLength={6}
+              required
               onChange={handleChange}
             />
             <input
               className="w-full h-12 border border-gray-800 px-3 rounded-lg"
               placeholder="Password"
               name="userPassword"
+              required
               onChange={handleChange}
               type="password"
             />
             {error && <p className="text-red-500 text-left">{error}</p>}
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Sign in
+              {isLoading ? "Authenticating" : "Sign in"}
             </button>
             <Link
               className="text-blue-500 hover:text-blue-800 text-sm"

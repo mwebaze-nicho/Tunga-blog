@@ -11,7 +11,7 @@ function PostUpdate({ params }) {
   error && <p>An error occured in fetching the post.</p>;
 
   return (
-    <div>
+    <div className="w-full flex justify-center items-center min-h-full">
       {data && (
         <EditPost
           title={data.data.postName}

@@ -7,26 +7,31 @@ import { api } from "@/config/axiosConfig";
 function ForgotPassword() {
   const [userName, setUserName] = useState("");
   const [error, seterror] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     try {
       const confirmed = confirm(
         "Are you sure you want to reset your password?"
       );
 
       if (confirmed) {
-        const res = await api.post("/api/users/reset", {userName});
+        const res = await api.post("/api/users/reset", { userName });
 
         if (res.error) {
           seterror("Password change request failed");
           return null;
         }
-        alert("Check your email and reset password.");
-        router.push("/");
+
+        setTimeout(() => {
+          alert("Check your email and reset password.");
+          router.push("/");
+        }, 1000);
       }
     } catch (error) {
       console.log("An error occured registering user");
@@ -61,9 +66,10 @@ function ForgotPassword() {
             {error && <p className="text-red-500 text-left">{error}</p>}
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Forgot Password
+              {isLoading ? "Submitting" : "Forgot Password"}
             </button>
             <div>
               <p>

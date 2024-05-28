@@ -11,6 +11,7 @@ function RegisterForm() {
     userEmail: "",
     userPassword: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
 
   const router = useRouter();
@@ -29,6 +30,7 @@ function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     if (session) {
       router.push("/");
       return;
@@ -47,7 +49,9 @@ function RegisterForm() {
       await api.post("/api/users", userData);
 
       //push to user login
-      router.push("/users/login");
+      setTimeout(() => {
+        router.push("/users/login");
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
@@ -100,8 +104,9 @@ function RegisterForm() {
             <button
               type="submit"
               className="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              disabled={isLoading}
             >
-              Register
+              {isLoading ? "Registering" : "Register"}
             </button>
 
             {/* Login if registered */}

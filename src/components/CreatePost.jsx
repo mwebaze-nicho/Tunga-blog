@@ -11,6 +11,7 @@ function CreatePost() {
     category: "AI",
     description: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const { data: session } = useSession();
 
@@ -31,6 +32,8 @@ function CreatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     const { title, category, description } = postDetails;
 
     const newPost = { postName: title, category, description };
@@ -42,7 +45,9 @@ function CreatePost() {
         },
       });
 
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
 
       //send error
     } catch (error) {
@@ -55,7 +60,10 @@ function CreatePost() {
   if (!session) return <LoginForm />;
 
   return (
-    <form className="flex min-h-full  w-full p-6 items-center justify-center" onSubmit={handleSubmit}>
+    <form
+      className="flex min-h-full  w-full p-6 items-center justify-center"
+      onSubmit={handleSubmit}
+    >
       <div className="w-full flex items-center justify-center">
         {!session && <LoginForm />}
         <div className="modal">
@@ -112,8 +120,12 @@ function CreatePost() {
             </div>
           </div>
           <div className="modal__footer">
-            <button type="submit" className="button button--primary">
-              Post
+            <button
+              type="submit"
+              className="button button--primary"
+              disabled={isLoading}
+            >
+              {isLoading ? "Posting..." : "Post"}
             </button>
           </div>
         </div>

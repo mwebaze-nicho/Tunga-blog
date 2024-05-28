@@ -8,6 +8,7 @@ import { api } from "@/config/axiosConfig";
 function PasswordReset() {
   const [password, setPassword] = useState("");
   const [error, seterror] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -33,6 +34,7 @@ function PasswordReset() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     try {
       const res = await api.patch(
         "/api/users/reset",
@@ -49,8 +51,11 @@ function PasswordReset() {
         seterror("Failed to update password");
         return null;
       }
-      alert(res.data.message);
-      router.push("/users/login");
+
+      setTimeout(() => {
+        alert(res.data.message);
+        router.push("/users/login");
+      }, 1000);
     } catch (error) {
       console.log("An error occured registering user");
     }
@@ -89,9 +94,10 @@ function PasswordReset() {
             {error && <p className="text-red-500 text-left">{error}</p>}
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full h-12 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Update Password
+              {isLoading ? "Updating" : "Update Password"}
             </button>
 
             {/* Create account if not yet registered */}
