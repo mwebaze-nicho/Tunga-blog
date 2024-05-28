@@ -78,6 +78,8 @@ function RegisterForm() {
               name="userName"
               type="text"
               value={userDetails.userName}
+              pattern="^\S+$"
+              title="No space allowed"
               minLength={6}
               required
               onChange={handleChange}
