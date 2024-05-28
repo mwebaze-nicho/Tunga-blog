@@ -18,7 +18,9 @@ function FeatureButton({ postId, feature, owner }) {
     try {
       setNewFeature((prevFeature) => !prevFeature);
       await api.patch(`/api/posts/${postId}/featured?feature=${!newFeature}`);
-      router.refresh();
+      setTimeout(() => {
+        router.refresh();
+      }, 1000);
     } catch (error) {
       setError("Failed to update feature status");
       console.log("Failed to feature post", error);
