@@ -15,9 +15,9 @@ function EachPost(props) {
   // const post = await res.data;
 
   return (
-    <div className="bg-white py-4">
+    <div className="bg-white py-4 min-w-full">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col md:flex-row md:gap-40 md:justify-center">
-        <div className="mx-auto mt-2 max-w-2xl  gap-x-8 gap-y-2 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto mt-2 w-full  gap-x-8 gap-y-2 border-t border-gray-200 pt-4 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {isLoading ? (
             <LoadingFrame />
           ) : error ? (
