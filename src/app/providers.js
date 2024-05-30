@@ -18,7 +18,6 @@ export function SwrProviders({ children }) {
       value={{
         fetcher,
         refreshInterval: 3000,
-        revalidateIfStale: true,
       }}
     >
       {children}
