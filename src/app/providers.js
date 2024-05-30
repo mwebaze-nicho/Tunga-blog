@@ -17,7 +17,6 @@ export function SwrProviders({ children }) {
     <SWRConfig
       value={{
         fetcher,
-        refreshInterval: 3000,
       }}
     >
       {children}
