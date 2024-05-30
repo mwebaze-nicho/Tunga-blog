@@ -1,5 +1,4 @@
 "use client";
-
 import { api } from "@/config/axiosConfig";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -14,13 +13,18 @@ function FeatureButton({ postId, feature, owner }) {
 
   const handleClick = async () => {
     setLoading(true);
-    setError(null);
     try {
-      setNewFeature((prevFeature) => !prevFeature);
-      await api.patch(`/api/posts/${postId}/featured?feature=${!newFeature}`);
-      setTimeout(() => {
+      setTimeout(async () => {
+        setNewFeature((prev) => !prev);
+
+        const updatedFeatureStatus = !newFeature;
+        
+        await api.patch(
+          `/api/posts/${postId}/featured?feature=${updatedFeatureStatus}`
+        );
+
         router.refresh();
-      }, 1000);
+      }, 3000);
     } catch (error) {
       setError("Failed to update feature status");
       console.log("Failed to feature post", error);
@@ -48,7 +52,7 @@ function FeatureButton({ postId, feature, owner }) {
         className="relative z-10 rounded-full bg-blue-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-blue-100"
         disabled={loading}
       >
-        {newFeature ? "Unfeature Post" : "Feature Post"}
+        {loading ? "..." : newFeature ? "Unfeature" : "Feature"}
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>

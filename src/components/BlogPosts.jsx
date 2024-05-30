@@ -1,12 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LoadingFrame from "./Loading";
+import { usePosts1 } from "@/services/queries";
 
-function BlogPosts({ data, error, isLoading }) {
+function BlogPosts({ pageIndex }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  const { data, error, isLoading, mutate } = usePosts1(pageIndex);
+
+  useEffect(() => {
+    mutate();
+  }, [data]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -16,7 +23,7 @@ function BlogPosts({ data, error, isLoading }) {
     setSelectedCategory(e.target.value);
   };
 
-  const filteredData = data?.filter((post) => {
+  const filteredData = data?.data?.filter((post) => {
     const matchesSearch = post.postName
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
@@ -32,9 +39,8 @@ function BlogPosts({ data, error, isLoading }) {
         className="bg-white py-4 mt-4 min-w-full min-h-full md:mt-8"
         id="blogs"
       >
-      
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <hr />
+          <hr />
           <div className="flex justify-between items-center flex-col md:flex-row my-4 gap-4 ">
             <div className="w-full">
               <p className="text-lg text-gray-900 font-bold ">All Blog Posts</p>
@@ -68,7 +74,7 @@ function BlogPosts({ data, error, isLoading }) {
               <LoadingFrame />
             ) : error ? (
               <p>Error fetching blogs</p>
-            ) : filteredData.length === 0 ? (
+            ) : !filteredData || filteredData?.length === 0 ? (
               <p className="text-gray-500">No matching blog posts found</p>
             ) : (
               filteredData.map((post, index) => {

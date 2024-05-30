@@ -32,7 +32,6 @@ function Navbar() {
       padding="1rem"
       className=" text-gray-800"
       // bg="teal.500"
-        
     >
       <span className="flex justify-between w-full">
         <h1 className="text-xl">TECH 🧑🏽‍💻 BLOG</h1>
@@ -40,12 +39,6 @@ function Navbar() {
           <Link as={NextLink} href="/" _hover={{ textDecoration: "none" }}>
             Home
           </Link>
-          {/* <Link as={NextLink} href="/about" _hover={{ textDecoration: "none" }}>
-            About
-          </Link>
-          <Link as={NextLink} href="#" _hover={{ textDecoration: "none" }}>
-            My Posts
-          </Link> */}
           <Link
             as={NextLink}
             href="/post/create"
@@ -53,6 +46,7 @@ function Navbar() {
           >
             Create Post
           </Link>
+
           {!session ? (
             <Link
               as={NextLink}
@@ -62,17 +56,26 @@ function Navbar() {
               Login
             </Link>
           ) : (
-            <Link
-              as={NextLink}
-              href="/"
-              _hover={{ textDecoration: "none" }}
-              onClick={() => signOut()}
-            >
-              Logout
-            </Link>
+            <>
+              <Link
+                as={NextLink}
+                href="/post/my-posts"
+                _hover={{ textDecoration: "none" }}
+              >
+                My Posts
+              </Link>
+              <Link
+                as={NextLink}
+                href="/"
+                _hover={{ textDecoration: "none" }}
+                onClick={() => signOut()}
+              >
+                Logout
+              </Link>
+            </>
           )}
         </span>
-  
+
         {/* for small screens */}
         <span className="md:hidden">
           <Menu isOpen={isOpen}>
@@ -93,12 +96,6 @@ function Navbar() {
               <MenuItem as={NextLink} href="/" onClick={handleMenuItemClick}>
                 Home
               </MenuItem>
-              {/* <MenuItem as={NextLink} href="/about" onClick={handleMenuItemClick}>
-                About
-              </MenuItem>
-              <MenuItem as={NextLink} href="#" onClick={handleMenuItemClick}>
-                My Posts
-              </MenuItem> */}
               <MenuItem
                 as={NextLink}
                 href="/post/create"
@@ -106,6 +103,7 @@ function Navbar() {
               >
                 Create Post
               </MenuItem>
+
               {!session ? (
                 <MenuItem
                   as={NextLink}
@@ -116,16 +114,25 @@ function Navbar() {
                   Login
                 </MenuItem>
               ) : (
-                <MenuItem
-                  as={NextLink}
-                  href="/"
-                  onClick={() => {
-                    handleMenuItemClick();
-                    signOut();
-                  }}
-                >
-                  Logout
-                </MenuItem>
+                <>
+                  <MenuItem
+                    as={NextLink}
+                    href="/post/my-posts"
+                    onClick={handleMenuItemClick}
+                  >
+                    My Posts
+                  </MenuItem>
+                  <MenuItem
+                    as={NextLink}
+                    href="/"
+                    onClick={() => {
+                      handleMenuItemClick();
+                      signOut();
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </>
               )}
             </MenuList>
           </Menu>

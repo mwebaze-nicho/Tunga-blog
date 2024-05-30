@@ -17,6 +17,6 @@ export function useOnePost(id) {
   return useSWR(`/api/posts/${id}`);
 }
 
-// export function userPosts(userId) {
-//   return useSWR(`/api/posts/userposts?userId=${userId}`);
-// }
+export function useUserPosts(userId) {
+  return useSWR(`/api/posts/userposts?userId=${userId}`);
+}

@@ -118,7 +118,7 @@ function Footer() {
           </Link>
         </ul>
         <div className="mt-12 flex justify-center">
-          Copyright reserved @ Mwebaze Nicholas {year}
+          Copyright reserved @ Mwebaze {year}
         </div>
       </div>
     </footer>

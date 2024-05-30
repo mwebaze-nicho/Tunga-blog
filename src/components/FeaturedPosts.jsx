@@ -5,9 +5,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useEffect } from "react";
 
 function FeaturedPosts() {
-  const { data } = useFeaturedPosts();
+  const { data, error, isLoading } = useFeaturedPosts();
+
+  useEffect(() => {
+    isLoading && <p>Loading ... </p>;
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    if (!data) {
+      return;
+    }
+  }, [data, isLoading]);
 
   return (
     <>

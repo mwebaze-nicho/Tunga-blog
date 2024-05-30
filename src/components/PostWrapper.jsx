@@ -8,21 +8,24 @@ function PostWrapper() {
   const [pages, setPages] = useState(1);
 
   //fecth posts
-  const { data, error, isLoading, mutate } = usePosts1(pageIndex);
+  const { data } = usePosts1(pageIndex);
 
-  //update state on data change
   useEffect(() => {
     if (data) {
       setPages(data.totalPages);
     }
-    mutate();
   }, [data]);
 
   //return results
   return (
     <div className="posts">
       {/* Returned blogs */}
-      <BlogPosts data={data && data.data} isLoading={isLoading} error={error} />
+      <BlogPosts pageIndex={pageIndex} />
+
+      {/* Prefetch */}
+      <div className="hidden">
+        <BlogPosts pageIndex={pageIndex + 1} />
+      </div>
       <div className="inline-flex items-center justify-center gap-8">
         {/* Pagination buttons */}
         <button
