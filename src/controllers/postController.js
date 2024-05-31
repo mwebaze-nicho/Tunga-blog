@@ -56,7 +56,7 @@ export const getPosts = async (page, limit) => {
 //targetting user specific posts
 
 export const createPost = async (req, userId) => {
-  const { postName, category, description } = await req.json();
+  const { postName, category, description, postImage } = await req.json();
 
   try {
     await connectDB();
@@ -67,6 +67,7 @@ export const createPost = async (req, userId) => {
       postName,
       category,
       description,
+      postImage,
     });
 
     //send response back after creating a post

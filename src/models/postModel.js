@@ -41,6 +41,7 @@ const postSchema = new mongoose.Schema(
       enum: ["AI", "Backend", "Frontend", "FullStack"],
       default: "Backend",
     },
+    postImage: { type: String },
     date: {
       type: Date,
       default: Date.now,

@@ -25,6 +25,17 @@ function EachPost(props) {
           ) : (
             data && (
               <article className="flex max-w-xl flex-col items-start justify-between">
+                {data.data.postImage && (
+                  <div className="group relative w-full h-56 overflow-hidden">
+                    <Image
+                      src={data.data.postImage}
+                      alt={data.data.postName}
+                      width={200}
+                      height={400}
+                      className="w-full h-full  object-cover transition-transform duration-300 ease-in-out transform group-hover:scale-105"
+                    />
+                  </div>
+                )}
                 <div className="group relative">
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
                     <span>

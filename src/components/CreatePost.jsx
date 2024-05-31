@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { api } from "@/config/axiosConfig";
 import { useSession } from "next-auth/react";
 import LoginForm from "./LoginForm";
+import { CldUploadWidget, CldImage } from "next-cloudinary";
 function CreatePost() {
   const [postDetails, setPostDetails] = useState({
     title: "",
@@ -12,6 +13,7 @@ function CreatePost() {
     description: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const { data: session } = useSession();
 
@@ -36,7 +38,12 @@ function CreatePost() {
 
     const { title, category, description } = postDetails;
 
-    const newPost = { postName: title, category, description };
+    const newPost = {
+      postName: title,
+      category,
+      description,
+      postImage: imageUrl,
+    };
 
     try {
       await api.post("/api/posts", newPost, {
@@ -76,15 +83,12 @@ function CreatePost() {
               <input
                 className="input__field"
                 type="text"
-                minLength={10}
-                maxLength={30}
                 name="title"
+                minLength={6}
                 onChange={handleChange}
                 required
               />
-              <p className="input__description">
-                10 minimun and 30 maximum characters
-              </p>
+              <p className="input__description">6 minimun characters</p>
             </div>
             <div className="input">
               <label className="input__label">Category</label>
@@ -109,13 +113,49 @@ function CreatePost() {
                 className="input__field input__field--textarea"
                 defaultValue={""}
                 name="description"
+                minLength={30}
                 onChange={handleChange}
-                minLength={50}
-                maxLength={1000}
                 required
               />
+              <p className="input__description">30 minimun characters</p>
+            </div>
+            <div className="input">
+              <label className="input__label">Post Image</label>
+
+              <CldUploadWidget
+                cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
+                uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+                resourceType="image"
+                multiple={false}
+                clientAllowedFormats={["jpg", "jpeg", "png"]}
+                maxFileSize={5000000}
+              >
+                {({ open, results, widget }) => {
+                  if (results) {
+                    const imageUrl = results.info.secure_url;
+                    setImageUrl(imageUrl);
+
+                    widget.close();
+                  }
+                  return (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        open();
+                      }}
+                      disabled={imageUrl !== ""}
+                      className={`input__field w-full h-full text-left  ${
+                        imageUrl !== "" && "cursor-not-allowed text-blue-600"
+                      }`}
+                    >
+                      {imageUrl === "" ? "Upload Image" : "Image uploaded"}
+                    </button>
+                  );
+                }}
+              </CldUploadWidget>
+
               <p className="input__description">
-                50 minimum and 1000 maximum characters
+                Must be jpg, jpeg and png formats{" "}
               </p>
             </div>
           </div>
