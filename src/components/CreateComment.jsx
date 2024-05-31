@@ -31,16 +31,16 @@ function CreateComment(props) {
 
     try {
       const newComment = { comment: comment };
-      const comm = await api.post(`/api/posts/${props.postId}/comment`, newComment, {
+      await api.post(`/api/posts/${props.postId}/comment`, newComment, {
         headers: {
           Authorization: `Bearer ${session.user.accessToken}`,
         },
       });
 
-      console.log(comm);
-
       setComment("");
-      router.refresh();
+      setTimeout(() => {
+        router.refresh();
+      }, 5000);
     } catch (error) {
       console.log(error);
     }

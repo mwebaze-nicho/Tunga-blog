@@ -9,7 +9,6 @@ function Comments({ comments }) {
         <div className="comment-container">
           {comments && comments.length > 0 ? (
             comments.map((comment, index) => {
-              const localDate = new Date(comment.date).toLocaleString();
               return (
                 <span key={index} className="mb-3 md:mb-6">
                   <div className="user">
@@ -23,7 +22,7 @@ function Comments({ comments }) {
                     </div>
                     <div className="user-info">
                       <span>{comment.commentor}</span>
-                      <span className=" font-light ">{localDate}</span>
+                      <span className=" font-light ">{comment.date}</span>
                     </div>
                   </div>
                   <p className="comment-content">{comment.comment}</p>
