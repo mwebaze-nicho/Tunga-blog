@@ -123,6 +123,7 @@ function CreatePost() {
               <label className="input__label">Post Image</label>
 
               <CldUploadWidget
+                options={{ sources: ["local", "url", "unsplash"] }}
                 cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
                 uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                 resourceType="image"

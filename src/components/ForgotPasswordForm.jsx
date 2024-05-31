@@ -3,6 +3,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/config/axiosConfig";
+import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ForgotPassword() {
   const [userName, setUserName] = useState("");
@@ -16,30 +19,62 @@ function ForgotPassword() {
 
     setIsLoading(true);
     try {
-      const confirmed = confirm(
-        "Are you sure you want to reset your password?"
-      );
+      Swal.fire({
+        title: "Are you sure you want to reset your password?",
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await api.post("/api/users/reset", { userName });
 
-      if (confirmed) {
-        const res = await api.post("/api/users/reset", { userName });
+          if (res.error) {
+            toast.error("Password change request failed", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setIsLoading(false);
+            return;
+          }
 
-        if (res.error) {
-          seterror("Password change request failed");
-          return null;
+          toast.success("Check your email and reset password.", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setIsLoading(false);
+
+          setTimeout(() => {
+            router.push("/");
+          }, 10000);
         }
-
-        setTimeout(() => {
-          alert("Check your email and reset password.");
-          router.push("/");
-        }, 1000);
-      }
+      });
     } catch (error) {
-      console.log("An error occured registering user");
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="h-96 flex items-center justify-center mt-24 ">
+      {/* initialize toastify */}
+      <ToastContainer />
       <div className="relative">
         <div className="absolute -top-1 -left-1 -right-1 -bottom-1 rounded-lg bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800 shadow-lg animate-pulse"></div>
         <div
