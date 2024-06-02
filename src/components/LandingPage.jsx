@@ -28,12 +28,12 @@ function LandingPage() {
         )}
         <span className="flex flex-col md:flex-row justify-around items-center  h-full w-full">
           <div className="text-center flex items-center justify-center flex-col md:w-1/2 ">
-            <h1 className="my-4 text-4xl font-bold tracking-tight text-gray-800 md:text-8xl">
-              <span className="md:ml-[-100px]">
-                DAILY <span className="text-white">DEV</span>{" "}
-              </span>
-              <span className="md:ml-[100px]">INSIGHTS</span>
-            </h1>
+            <div className="flex flex-col text-4xl font-bold md:text-6xl">
+              <h1 className="my-4  tracking-tight text-gray-800 ml-[-50px md:ml-[-100px] after:* marker:">
+                DAILY <span className="text-white">DEV</span>
+              </h1>
+              <h1 className="ml-[50px] md:ml-[100px]">INSIGHTS</h1>
+            </div>
             <p className="mt-4 text-lg leading-7 text-gray-800">
               Dive into the world of technology with insights on AI, Backend,
               Frontend, and Fullstack development.
