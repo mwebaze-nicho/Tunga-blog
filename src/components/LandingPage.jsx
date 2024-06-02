@@ -20,21 +20,21 @@ function LandingPage() {
 
   return (
     <>
-      <main className="grid min-h-full place-items-center bg-gradient-to-tr from-blue-400/90 via-blue-300 to-blue-800/85 px-6 py-52 md:py-32 lg:px-8 relative">
+      <main className="grid min-h-full place-items-center bg-gradient-to-tr from-blue-800/90 via-blue-300 to-blue-800/85 px-6 py-52 md:py-32 lg:px-8 relative">
         {userName && (
           <p className="absolute left-6 top-6 text-gray-800">
-           ✨✨ Hello, {userName} ✨✨
+            ✨✨ Hello, {userName} ✨✨
           </p>
         )}
-        <span className="flex flex-col md:flex-row h-full w-full justify-around items-center">
-          <div className="text-center flex items-center justify-center flex-col md:w-1/2">
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-800 sm:text-5xl">
-              Tech 🧑🏽‍💻 Blog
+        <span className="flex flex-col md:flex-row justify-around items-center  h-full w-full">
+          <div className="text-center flex items-center justify-center flex-col md:w-1/2 ">
+            <h1 className="my-4 text-6xl font-bold tracking-tight text-gray-800 sm:text-8xl">
+              <span className="ml-[-100px]">
+                DAILY <span className="text-white">DEV</span>{" "}
+              </span>
+              <span className="ml-[100px]">INSIGHTS</span>
             </h1>
-            <p className="mt-6 text-lg leading-7 text-gray-600">
-              Final project at Tunga BE cohort 2
-            </p>
-            <p className="mt-4 text-lg leading-7 text-gray-600">
+            <p className="mt-4 text-lg leading-7 text-gray-800">
               Dive into the world of technology with insights on AI, Backend,
               Frontend, and Fullstack development.
             </p>
@@ -47,20 +47,32 @@ function LandingPage() {
               </Link>
             </div>
           </div>
-          <Image
-            className="opacity-80 hidden md:flex"
-            src={"/code.png"}
-            alt="code"
-            width={400}
-            height={400}
-          />
+          <div className="text-center">
+            <Image
+              className="opacity-80 hidden md:flex"
+              src={"/dev-digest.png"}
+              alt="logo"
+              width={400}
+              height={400}
+            />
+
+            <span className="md:hidden py-6 w-full flex justify-center items-center">
+              <Image
+                className="opacity-80"
+                src={"/dev-digest.png"}
+                alt="logo"
+                width={250}
+                height={250}
+              />
+            </span>
+          </div>
         </span>
         <section className="mt-16 md:mt-24 lg:mt-32 px-4 sm:px-6 lg:px-8 w-full max-w-5xl">
           <div className="text-center">
             <h2 className="text-2xl font-bold text-gray-800 sm:text-3xl">
               What You&apos;ll Find Here
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 text-lg text-gray-800">
               Explore the latest trends, tips, and best practices in the world
               of technology.
             </p>
