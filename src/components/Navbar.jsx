@@ -33,7 +33,7 @@ function Navbar() {
       padding="1rem"
       className=" text-gray-800"
     >
-      <span className="flex justify-between w-full">
+      <span className="flex justify-between w-full items-center">
         <h1 className="text-xl">THE DEV DIGIST 🧑🏽‍💻</h1>
         <span className="hidden md:flex gap-8 items-center">
           <Link as={NextLink} href="/" _hover={{ textDecoration: "none" }}>

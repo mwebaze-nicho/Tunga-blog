@@ -4,9 +4,9 @@ import { AuthProvider, ChackraProviders, SwrProviders } from "./providers";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "Tech 🧑🏽‍💻 Blog",
+  title: "Dev 🧑🏽‍💻 Digist",
   description:
-    "Final backend project at Tunga. This blog demonstrates CRUD operations using MongoDB, Node.js and frontend using Next.js",
+    "Explore our blog for the latest insights across AI, Frontend, Backend, and Fullstack development. Discover cutting-edge AI advancements, stay updated with frontend technologies, learn the intricacies of backend development, and master the art of fullstack programming. Whether you're a beginner or a seasoned developer, our comprehensive guides and articles will help you stay ahead in the tech world.",
 };
 
 export default function RootLayout({ children }) {
